@@ -6,7 +6,7 @@
 
 public class Adoquin {
 
-    static int tamano_tablero, b , a, cont=0;
+    static int tamano_tablero, cont=0;
     static int [][]tablero;
     /**
      * Coloca un adoquin en las tres celdas dadas del tablero.
@@ -103,16 +103,13 @@ public class Adoquin {
         //Iniciamos el arreglo tamano 2^k x 2^k
         tablero = new int[tamano_tablero][tamano_tablero];
 
-        //Coordenadas donde se inicia el primer adoquin especial
-        a = 0;
-        b = 0;
+        //Adoquin especial 
+        tablero[0][0] = -1;
 
-        //Tablero especial 
-        tablero[a][b] = -1;
-
-        colocarAdoquines(tamano_tablero, 0, 0);
+        colocarAdoquines(tamano_tablero, 0, 0 );
 
         //Se imprime el tablero finalizado
+        System.out.println("Adoquin especial en la posicion (0,0) con valor -1");
         for(int i=0; i<tamano_tablero; i++){
             for(int j=0; j<tamano_tablero; j++){
                 System.out.printf("%4d", tablero[i][j]);
