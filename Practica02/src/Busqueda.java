@@ -7,44 +7,52 @@ import java.util.Scanner;
  */
 public class Busqueda {
     
-    public static int[] arregloAleatorio(int n, int a, int b){
+    /**
+     * Método que crea un arreglo aleatorio de n elementos, con un incremento de maximo 1.
+     * @param a Primer elemento 
+     * @return arreglo de n elementos
+     */
+    public static int[] arregloAleatorio(int n, int a){
         int[] X = new int[n];
-        X[0] = a;  // El primer valor es a
-        X[n - 1] = b;  // El último valor es b
+        X[0] = a;
         
-        // Generar valores intermedios respetando las restricciones
         Random random = new Random();
-        for (int i = 1; i < n - 1; i++) {
-            if (X[i - 1] < b) {
-                // Si el valor anterior es menor que b, podemos incrementar o mantener
-                X[i] = X[i - 1] + random.nextInt(2);  // Puede ser el mismo valor o aumentar 1
-            } else {
-                // Si el valor anterior ya es mayor o igual que b, lo mantenemos o decrementamos
-                X[i] = X[i - 1] - random.nextInt(2);  // Puede ser el mismo valor o disminuir 1
-            }
+        
+        for (int i = 1; i <= n - 1; i++) {
+            X[i] = X[i - 1] + random.nextInt(2);
         }
+
         return X;
     }
 
-    public static int busqueda(int[] X,int ini, int fin,  int z){
+    public static int busqueda(int[] X, int z){
+        return busquedaRec(X, 0, X.length-1,z); 
+    }
+    /**
+     * Metodo que busca un elemento z en el arreglo
+     * @param X
+     * @param ini
+     * @param fin
+     * @param z
+     * @return
+     */
+    private static int busquedaRec(int[] X,int ini, int fin,  int z){
         if (ini > fin) {
-            return -1;  // No encontrado
+            return -1;
         }
 
         int mid = (ini + fin) / 2;
 
         if (X[mid] == z) {
-            return mid;  // Valor encontrado
+            return mid;
         }
 
-        // Si X[mid] es menor que z, movemos el índice hacia adelante
         if (X[mid] < z) {
-            int nuevoInicio = mid + (z - X[mid]);  // Aprovechamos que la diferencia es ≤ 1
-            return busqueda(X, nuevoInicio, fin, z);  // Llamada recursiva
-        } else {
-            // Si X[mid] es mayor que z, movemos el índice hacia atrás
-            int nuevoFin = mid - (X[mid] - z);  // Aprovechamos que la diferencia es ≤ 1
-            return busqueda(X, ini, nuevoFin, z);  // Llamada recursiva
+            int nuevoInicio = mid + (z - X[mid]); 
+            return busquedaRec(X, nuevoInicio, fin, z);
+        }else{
+            int nuevoFin = mid - (X[mid] - z); 
+            return busquedaRec(X, ini, nuevoFin, z);  
         }
     }
 
@@ -58,10 +66,9 @@ public class Busqueda {
 
         // Generar valores aleatorios para a y b, asegurando que a < b
         int a = random.nextInt(100);  // Valor aleatorio para a
-        int b = a + n;  // Valor aleatorio para b, garantizando que b > a
 
         // Generar el arreglo
-        int[] X = arregloAleatorio(n, a, b);
+        int[] X = arregloAleatorio(n, a);
 
         // Imprimir el arreglo generado
         System.out.println("Arreglo generado:");
@@ -71,11 +78,11 @@ public class Busqueda {
         System.out.println();
 
         // Generar un valor z aleatorio entre a y b
-        int z = a + random.nextInt(b - a + 1);
+        int z = a + random.nextInt(20);
         System.out.println("Valor z a buscar: " + z);
 
         // Realizar la búsqueda
-        int indice = busqueda(X,0,X.length-1, z);
+        int indice = busqueda(X, z);
 
         // Imprimir el resultado
         if (indice != -1) {
