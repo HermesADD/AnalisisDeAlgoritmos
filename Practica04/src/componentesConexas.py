@@ -14,10 +14,10 @@ def leer_grafica(nombreArchivo):
   - Un diccionarios donde las claves son los vértices y los valores son vecinos.
   
   Ejemplo de formato del archivo:
-    a,b,c,d,e
-    a,b
-    b,c
-    d,e
+    a,b,c,d,e,
+    a,b,
+    b,c,
+    d,e,
   Resultado:
     {
       'a': ['b'],
@@ -95,9 +95,12 @@ def main(archivo):
   """
   grafica = leer_grafica(archivo)
   componentes = componentes_conexas(grafica)
-
+  print("Gráfica:")
+  for vertice, vecinos in grafica.items():
+    print(f"{vertice}: {', '.join(vecinos)}")
+  print("\nEn la gráfica anterior se encuentran las siguientes componentes conexas:")
   for componente in componentes:
-    print(componente)
+    print(f"[{', '.join(componente)}]")
 
 if __name__ == "__main__":
   # Ejecuta la función principal con el archivo "grafica.txt"
