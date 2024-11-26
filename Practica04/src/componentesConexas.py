@@ -1,3 +1,8 @@
+"""
+Autor:
+Hermes Alberto Delgado Díaz
+319258613
+"""
 def leer_grafica(nombreArchivo):
   """
   Lee una gráfica desde un archivo.
