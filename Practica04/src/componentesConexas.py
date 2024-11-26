@@ -11,7 +11,7 @@ def leer_grafica(nombreArchivo):
   - nombreArchivo(str): Nombre del archivo que contiene la gráfica.
 
   Retorno:
-  - Un diccionarios donde las claves son los vértices y los valores son vecinos.
+  - dict: Un diccionario donde las claves son los vértices y los valores son vecinos.
   
   Ejemplo de formato del archivo:
     a,b,c,d,e,
@@ -30,13 +30,13 @@ def leer_grafica(nombreArchivo):
 
   with open(nombreArchivo, 'r') as file:
     vertices = file.readline().strip().split(',')
-    vertices = [vertice for vertice in vertices if vertice]
+    vertices = [vertice for vertice in vertices if vertice]#Evita vértices vacíos ""
 
     grafica = {vertice: [] for vertice in vertices}
 
-    for line in file:
-      arista = line.strip().split(',')
-      arista = [a for a in arista if a]
+    for linea in file:
+      arista = linea.strip().split(',')
+      arista = [a for a in arista if a]#Evita aristas vacías ""
       if len(arista) == 2:
         u,v = arista
         if u in grafica and v in grafica:
